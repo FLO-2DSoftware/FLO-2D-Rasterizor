@@ -3,7 +3,7 @@ name=FLO-2D Rasterizor
 qgisMinimumVersion=3.0
 qgisMaximumVersion=4.99
 description=Convert FLO-2D grid output files to GeoTIFF rasters and compare raster results.
-version=0.3.3
+version=0.4.0
 author=Karen O’Brien, Robson Leo Pachaly
 email=contact@flo-2d.com
 
@@ -15,11 +15,14 @@ repository=https://github.com/FLO-2DSoftware/FLO-2D-Rasterizor
 hasProcessingProvider=no
 
 changelog=
-  0.3.3
-  - Rebuild rasterizor.py with cleaner code
-	- Rebuild dialog *.py file with cleaner code
-	- Update readme
-	- cleaning out old code without losing functionality
+  0.4.0
+    - Added compatibility with QGIS 4.0 (Qt6) while maintaining QGIS 3.44 (Qt5) support.
+    - Refactored raster processing code for improved readability, reliability, and maintainability.
+    - Simplified dialog initialization and improved code documentation.
+    - Improved input validation and error handling.
+    - Updated README and repository links.
+    - Removed obsolete code and unnecessary Qt resource files.
+    - Preserved existing raster creation, comparison, and styling functionality.
   0.3.2
     - Fixed the grid size calculation
   0.3.1

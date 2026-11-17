@@ -1,19 +1,24 @@
 [general]
 name=FLO-2D Rasterizor
 qgisMinimumVersion=3.0
-description=A plugin to rasterize general FLO-2D output files.
-version=0.3.2
-author=Karen OBrien, Robson Leo Pachaly
+description=Convert FLO-2D grid output files to GeoTIFF rasters and compare raster results.
+version=0.3.3
+author=Karen O’Brien, Robson Leo Pachaly
 email=contact@flo-2d.com
 
-about=This plugin rasterizes generic FLO-2D output files with columns ge, x, y, and var, where ge is the grid element, x and y are coordinates, and var is the output data. It can be used on various output files such as depth, velocity, mudflow, and sediment transport. This plugin simplifies data mapping and captures data that Mapper and Mesh tools may miss.
+about=FLO-2D Rasterizor converts four-column FLO-2D grid output records (grid element ID, X coordinate, Y coordinate, and output value) into georeferenced GeoTIFF rasters. It supports mapping results such as depth, velocity, water surface elevation, and time-related outputs. The plugin also compares two raster layers and styles the difference raster.
 
-tracker=https://github.com/FLO-2DKaren/FLO-2D-Rasterizor/issues
-repository=https://github.com/FLO-2DKaren/FLO-2D-Rasterizor
+tracker=https://github.com/FLO-2DSoftware/FLO-2D-Rasterizor/issues
+repository=https://github.com/FLO-2DSoftware/FLO-2D-Rasterizor
 
 hasProcessingProvider=no
 
 changelog=
+  0.3.3
+  - Rebuild rasterizor.py with cleaner code
+	- Rebuild dialog py file with cleaner code
+	- Update readme
+	- cleaning out old code without losing functionality
   0.3.2
     - Fixed the grid size calculation
   0.3.1
@@ -35,9 +40,9 @@ changelog=
     - Set pixel size and CRS
     - Requires rasterio
 
-tags=python, rasterize, FLO-2D output, .OUT files
+tags=FLO-2D, raster, GeoTIFF, flood modeling, output
 
-homepage=https://github.com/FLO-2DKaren/FLO-2D-Rasterizor/wiki
+homepage=https://github.com/FLO-2DSoftware/FLO-2D-Rasterizor/wiki
 category=Raster
 icon=icon.png
 experimental=False

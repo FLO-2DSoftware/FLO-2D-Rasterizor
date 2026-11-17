@@ -166,31 +166,59 @@ class Rasterizor:
         for layer in list(project.mapLayersByName(layer_name)):
             project.removeMapLayer(layer.id())
 
+
     @staticmethod
     def _read_grid_values(input_file):
-        """Read FLO-2D ``cell_id x y value`` rows.
+        """Read FLO-2D grid output records.
 
-        Ignore blank lines and headers. Raise an informative error when the
-        input contains malformed numeric data or no usable grid records.
+        Expected format:
+            cell_id  x_coordinate  y_coordinate  value
+
+        Blank lines and nonnumeric headers are ignored.
+
+        Args:
+            input_file (str): Path to the FLO-2D output file.
+
+        Returns:
+            list[tuple]: List of (x, y, value) records.
+
+        Raises:
+            ValueError: If a record is malformed or no valid records exist.
         """
-        points = self._read_grid_values(input_file)
+        points = []
+
         with open(input_file, "r", encoding="utf-8-sig") as stream:
             for line_number, line in enumerate(stream, start=1):
                 fields = line.split()
+
+                # Skip blank lines and headers.
                 if not fields or not fields[0].isdigit():
                     continue
+
                 if len(fields) < 4:
-                    raise ValueError(f"Line {line_number}: expected cell ID, X, Y, value.")
+                    raise ValueError(
+                        f"Line {line_number}: expected cell ID, X, Y, value."
+                    )
+
                 try:
                     x, y, value = map(float, fields[1:4])
                 except ValueError as exc:
-                    raise ValueError(f"Line {line_number}: invalid numeric value.") from exc
+                    raise ValueError(
+                        f"Line {line_number}: invalid numeric value."
+                    ) from exc
+
                 if not np.isfinite([x, y, value]).all():
-                    raise ValueError(f"Line {line_number}: non-finite coordinate or value.")
+                    raise ValueError(
+                        f"Line {line_number}: non-finite coordinate or value."
+                    )
+
                 points.append((x, y, value))
+
         if not points:
             raise ValueError("No valid FLO-2D grid records were found.")
+
         return points
+
 
     @staticmethod
     def _infer_cell_size(points):

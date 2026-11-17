@@ -16,7 +16,7 @@ hasProcessingProvider=no
 changelog=
   0.3.3
   - Rebuild rasterizor.py with cleaner code
-	- Rebuild dialog py file with cleaner code
+	- Rebuild dialog *.py file with cleaner code
 	- Update readme
 	- cleaning out old code without losing functionality
   0.3.2

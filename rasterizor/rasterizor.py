@@ -95,7 +95,7 @@ class Rasterizor:
         self.dlg.runButton_2.clicked.connect(self.run_comparison)
         self.dlg.cancelButton.clicked.connect(self.closeDialog)
         self.dlg.cancelButton_2.clicked.connect(self.closeDialog)
-        raster_filter = QgsMapLayerProxyModel.RasterLayer
+        raster_filter = QgsMapLayerProxyModel.Filter.RasterLayer
         self.dlg.readFile_1.setFilters(raster_filter)
         self.dlg.readFile_2.setFilters(raster_filter)
 
@@ -337,7 +337,7 @@ class Rasterizor:
         calculator can resolve their band references.
         """
         expression = f'"{raster_1.name()}@1" - "{raster_2.name()}@1"'
-        QgsMessageLog.logMessage(expression, LOG_TAG, Qgis.Info)
+        QgsMessageLog.logMessage(expression, LOG_TAG, Qgis.MessageLevel.Info)
         result = processing.run(
             "qgis:rastercalculator",
             {
@@ -356,7 +356,7 @@ class Rasterizor:
         if layer is None or not layer.isValid():
             raise ValueError("Cannot style an invalid raster layer.")
         provider = layer.dataProvider()
-        stats = provider.bandStatistics(1, QgsRasterBandStats.All, layer.extent(), 0)
+        stats = provider.bandStatistics(1, QgsRasterBandStats.Stats.All, layer.extent(), 0)
         minimum = float(stats.minimumValue)
         maximum = float(stats.maximumValue)
 
@@ -413,5 +413,5 @@ class Rasterizor:
 
     def _report_error(self, message):
         """Report a processing failure to both QGIS and the user."""
-        QgsMessageLog.logMessage(message, LOG_TAG, Qgis.Critical)
+        QgsMessageLog.logMessage(message, LOG_TAG, Qgis.MessageLevel.Critical)
         QMessageBox.critical(self.dlg, PLUGIN_NAME, message)

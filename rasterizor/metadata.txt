@@ -1,6 +1,7 @@
 [general]
 name=FLO-2D Rasterizor
 qgisMinimumVersion=3.0
+qgisMaximumVersion=4.99
 description=Convert FLO-2D grid output files to GeoTIFF rasters and compare raster results.
 version=0.3.3
 author=Karen O’Brien, Robson Leo Pachaly
